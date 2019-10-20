@@ -35,7 +35,6 @@ def Euler(metodo):
 
 def Euler_Inverso(metodo):
 
-
     #DECLARACAO
     y0 = float(metodo[0])
     y = [y0]
@@ -152,6 +151,7 @@ def Adam_Bashforth(nome, metodo):
         
     for i in range(len(y0)):
         y0[i-1] = float(y0[i-1])
+    
     def convert(Y,T):
         f = funcao.subs(y_, Y)
         f = f.subs(t_,T)
@@ -222,7 +222,7 @@ def Adam_Bashforth(nome, metodo):
     return y0
 
 
-def Adam_Multon(nome, metodo):
+def Adam_Moulton(nome, metodo):
     
     #DECLARACAO
     
@@ -237,22 +237,23 @@ def Adam_Multon(nome, metodo):
     t0 = float(metodo[-5])
     numPassos = str(ordem-2)
     if(search('euler$', nome)):
-        print('Método Adam-Multon por Euler')
+        print('Método Adam-Moulton por Euler')
         y0 = Euler([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_inverso$', nome)):
-        print('Método Adam-Multon por Euler Inverso')
+        print('Método Adam-Moulton por Euler Inverso')
         y0 = Euler_Inverso([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_aprimorado$', nome)):
-        print('Método Adam-Multon por Euler Aprimorado')
+        print('Método Adam-Moulton por Euler Aprimorado')
         y0 = Euler_Aprimorado([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('runge_kutta$', nome)):
-        print('Método Adam-Multon por Runge Kutta')
+        print('Método Adam-Moulton por Runge Kutta')
         y0 = Runge_Kutta([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     else: #Com os pontos determinados
-        print('Método Adam-Multon')
+        print('Método Adam-Moulton')
         y0 = metodo[:-5]
     for i in range(len(y0)):
         y0[i-1] = float(y0[i-1])
+
     def convert(Y,T):
         f = funcao.subs(y_, Y)
         f = f.subs(t_,T)
@@ -362,6 +363,7 @@ def Formula_Inversa(nome, metodo):
         y0 = metodo[:-5]
     for i in range(len(y0)):
         y0[i-1] = float(y0[i-1])
+
     def convert(Y,T):
         f = funcao.subs(y_, Y)
         f = f.subs(t_,T)
@@ -408,7 +410,9 @@ def Formula_Inversa(nome, metodo):
 arq = open('entrada.txt', 'r')
 entrada = arq.read()
 casos = entrada.splitlines()
+count = 0
 for metodos in casos:
+    count = count + 1
     metodos = metodos.split(' ')
     y = []
     t = []
@@ -427,34 +431,33 @@ for metodos in casos:
     elif metodos[0] == 'runge_kutta':
         print('Método de Range-Kutta')
         y = Runge_Kutta(metodos[1:])
-    elif search('^adam_bashforth',metodos[0]):
-        y = Adam_Bashforth(metodos[0], metodos[1:])
-        h  = metodos[-4]
-        t0 = metodos[-5]
-        passos = metodos[-3] 
-    elif search('^adam_multon',metodos[0]):
-        y = Adam_Multon(metodos[0], metodos[1:])
+    else:
+
         h  = metodos[-4]
         t0 = metodos[-5]
         passos = metodos[-3]
-    elif search('^formula_inversa',metodos[0]):
-        y = Formula_Inversa(metodos[0], metodos[1:])
-        h  = metodos[-4]
-        t0 = metodos[-5]
-        passos = metodos[-3] 
-    else:
-        print ('Não existe')
-        continue
+        
+        if search('^adam_bashforth',metodos[0]):
+            y = Adam_Bashforth(metodos[0], metodos[1:])    
+        elif search('^adam_moulton',metodos[0]):
+            y = Adam_Moulton(metodos[0], metodos[1:])
+        elif search('^formula_inversa',metodos[0]):
+            y = Formula_Inversa(metodos[0], metodos[1:])
+        else:
+            print ('Não existe')
+            continue
+        print('Ordem =', metodos[-1])
     t = [float(t0)]
     for i in range(int(passos)):
         t.append(t[-1] + float(h))
-
-    plt.plot(t,y, label=metodos[0])
     
-    print (y[-1])
+    plt.plot(t,y, label=('(' + str(count) + ') ' + metodos[0]))
+    
+    print('y(', float(t0), ') =', float(metodos[1]))
+    print('h =', float(h))
+    for i in range(int(passos)+1):
+        print (i, '\t', y[i])
 plt.ylabel('Eixo Y')
 plt.xlabel('Eixo T')
 plt.legend(loc='upper left',ncol = 2, fontsize = 'xx-small')
 plt.show()
-
-

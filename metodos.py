@@ -292,7 +292,7 @@ def Adam_Moulton(nome, metodo):
             f1 = convert(y0[-2],t0-h)
             f2 = convert(y0[-3],t0-2*h)
             f3 = convert(y0[-4],t0-3*h)
-            y0.append(y0[-1] + h*(fp*251/720 + f0*323/720 - f1*11/30 + f2*53/360 - f3*19/720))
+            y0.append(y0[-1] + h*(fp*251/720 + f0*323/360 - f1*11/30 + f2*53/360 - f3*19/720))
             
         elif ordem == 6:
             bashforth = Adam_Bashforth('',[str(i) for i in [y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0 - 4*h, h, ordem - 1, metodo[-2], ordem - 1]])
@@ -448,10 +448,10 @@ for metodos in casos:
     h  = metodos[-3]
     t0 = metodos[-4]
     passos = metodos[-2]
-    print(metodos[0])
+    #print(metodos[0])
     if metodos[0] == 'erro':
+        count = count - 1
         ideal = Vetor_Ideal(metodos[1:])
-        print("HAHAHA")
         continue
     if metodos[0] == 'euler':
         saida.write('Método de Euler\n')
@@ -491,23 +491,37 @@ for metodos in casos:
     #     print('ideal[ '+str(i)+'] = '+str(ideal[i]))
     #     print('y[ '+str(i)+'] = '+str(y[i]))
     #     print('erro[ '+str(i)+'] = '+ str(erro))
-    erro = (ideal[int(passos)]-y[int(passos)])/ideal[int(passos)]
-    if(erro<0):
-        erro = -erro
-    print('ideal[', int(passos), '] = ', "{:.6}".format(ideal[int(passos)]))
-    print('y[', int(passos), '] = ', "{:.6}".format(y[int(passos)]))
-    print('erro[', int(passos), '] = ', "{:.4%}".format(erro/100))
+    
+    print('ideal\t[', int(t0), ']\t= ', "{:.6}".format(ideal[0]))
+    print('y\t[', int(t0), ']\t= ', "{:.6}".format(y[0]))
+    print ("\n")
+    for i in range(int(passos)+1):
+        
+        if (i != 0) and (i%10 == 0):
+            p = int(t0) + int(i)*int(h)
+            if(ideal[int(i)*int(h)]==0):
+                ideal[int(i)*int(h)]= 0.0000001
+            erro = (ideal[int(i)*int(h)]-y[int(i)*int(h)])/ideal[int(i)*int(h)]
+            if(erro<0):
+                erro = -erro
+            print('ideal\t[', p, ']\t= ', "{:.6}".format(ideal[int(i)*int(h)]))
+            print('y\t[', p, ']\t= ', "{:.6}".format(y[int(i)*int(h)]))
+            print('erro\t[', p, ']\t= ', "{:.4%}".format(erro/100))
+            print ("\n")
 
     t = [float(t0)]
     for i in range(int(passos)):
         t.append(t[-1] + float(h))
-    
-    plt.plot(t,y, label=('(' + str(count) + ') ' + metodos[0]))
+    if count % 2 == 0:
+        plt.plot(t,y, label=('Tanque B'))
+    else:
+        plt.plot(t,y, label=('Tanque A'))
+
     
     saida.write('y(%f) = ' %float(t0))
     saida.write('%f\n' %float(metodos[1]))
     saida.write('h = %f\n' %float(h))
-    if(count%5==0):
+    if(count%2==0):
         
         plt.ylabel('Quantidade de sal(kg)')
         plt.xlabel('Tempo(min)')

@@ -5,6 +5,7 @@ from sympy import *
 from sympy.parsing.sympy_parser import parse_expr
 import matplotlib.pyplot as plt
 
+    
 def Euler(metodo):
     
     #y0, t0, h, passos, f
@@ -133,20 +134,20 @@ def Adam_Bashforth(nome, metodo):
     t0 = float(metodo[-5])
     numPassos = str(ordem-1)
     if(search('euler$', nome)):
-        print('Método Adam-Bashforth por Euler')
+        saida.write('Método Adam-Bashforth por Euler')
         y0 = Euler([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_inverso$', nome)):
-        print('Método Adam-Bashforth por Euler Inverso')
+        saida.write('Método Adam-Bashforth por Euler Inverso')
         y0 = Euler_Inverso([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_aprimorado$', nome)):
-        print('Método Adam-Bashforth por Euler Aprimorado')
+        saida.write('Método Adam-Bashforth por Euler Aprimorado')
         y0 = Euler_Aprimorado([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('runge_kutta$', nome)):
-        print('Método Adam-Bashforth por Runge Kutta')
+        saida.write('Método Adam-Bashforth por Runge Kutta')
         y0 = Runge_Kutta([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     else: #Com os pontos determinados
         if(search('adam_bashforth$',nome)):
-            print('Método Adam-Bashforth')
+            saida.write('Método Adam-Bashforth')
         y0 = metodo[:-5]
         
     for i in range(len(y0)):
@@ -237,19 +238,19 @@ def Adam_Moulton(nome, metodo):
     t0 = float(metodo[-5])
     numPassos = str(ordem-2)
     if(search('euler$', nome)):
-        print('Método Adam-Moulton por Euler')
+        saida.write('Método Adam-Moulton por Euler')
         y0 = Euler([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_inverso$', nome)):
-        print('Método Adam-Moulton por Euler Inverso')
+        saida.write('Método Adam-Moulton por Euler Inverso')
         y0 = Euler_Inverso([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_aprimorado$', nome)):
-        print('Método Adam-Moulton por Euler Aprimorado')
+        saida.write('Método Adam-Moulton por Euler Aprimorado')
         y0 = Euler_Aprimorado([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('runge_kutta$', nome)):
-        print('Método Adam-Moulton por Runge Kutta')
+        saida.write('Método Adam-Moulton por Runge Kutta')
         y0 = Runge_Kutta([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     else: #Com os pontos determinados
-        print('Método Adam-Moulton')
+        saida.write('Método Adam-Moulton')
         y0 = metodo[:-5]
     for i in range(len(y0)):
         y0[i-1] = float(y0[i-1])
@@ -270,14 +271,14 @@ def Adam_Moulton(nome, metodo):
             y0.append(y0[-1] + h*(fp*1/2 + f0*1/2))
             
         elif ordem == 3:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem - 1]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-2], y0[-1], t0-h, h, ordem - 1, metodo[-2], ordem - 1]])
             fp = convert(bashforth[-1],t0+h)
             f0 = convert(y0[-1],t0)
             f1 = convert(y0[-2],t0-h)
             y0.append(y0[-1] + h*(fp*5/12 + f0*2/3 - f1*1/12))
             
         elif ordem == 4:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-3], y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem - 1]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-3], y0[-2], y0[-1], t0-2*h, h, ordem - 1, metodo[-2], ordem - 1]])
             fp = convert(bashforth[-1],t0+h)
             f0 = convert(y0[-1],t0)
             f1 = convert(y0[-2],t0-h)
@@ -285,7 +286,7 @@ def Adam_Moulton(nome, metodo):
             y0.append(y0[-1] + h*(fp*3/8 + f0*19/24 - f1*5/24 + f2*1/24))
             
         elif ordem == 5:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem - 1]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-4], y0[-3], y0[-2], y0[-1], t0 - 3*h, h, ordem - 1, metodo[-2], ordem - 1]])
             fp = convert(bashforth[-1],t0+h)
             f0 = convert(y0[-1],t0)
             f1 = convert(y0[-2],t0-h)
@@ -294,7 +295,7 @@ def Adam_Moulton(nome, metodo):
             y0.append(y0[-1] + h*(fp*251/720 + f0*323/720 - f1*11/30 + f2*53/360 - f3*19/720))
             
         elif ordem == 6:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem - 1]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0 - 4*h, h, ordem - 1, metodo[-2], ordem - 1]])
             fp = convert(bashforth[-1],t0+h)
             f0 = convert(y0[-1],t0)
             f1 = convert(y0[-2],t0-h)
@@ -304,7 +305,7 @@ def Adam_Moulton(nome, metodo):
             y0.append(y0[-1] + h*(fp*95/288 + f0*1427/1440 - f1*133/240 + f2*241/720 - f3*173/1440 + f4*3/160))
             
         elif ordem == 7:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-6], y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem - 1]])            
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-6], y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0 - 5*h, h, ordem - 1, metodo[-2], ordem - 1]])            
             fp = convert(bashforth[-1],t0+h)
             f0 = convert(y0[-1],t0)
             f1 = convert(y0[-2],t0-h)
@@ -315,7 +316,7 @@ def Adam_Moulton(nome, metodo):
             y0.append(y0[-1] + h*(fp*19087/60480 + f0*2713/2520 - f1*15487/20160 + f2*586/945 - f3*6737/20160 + f4*263/2520 - f5*863/60480))
         
         elif ordem == 8:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-7], y0[-6], y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem - 1]])            
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-7], y0[-6], y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0 - 6*h, h, ordem - 1, metodo[-2], ordem - 1]])            
             fp = convert(bashforth[-1],t0+h)
             f0 = convert(y0[-1],t0)
             f1 = convert(y0[-2],t0-h)
@@ -325,7 +326,6 @@ def Adam_Moulton(nome, metodo):
             f5 = convert(y0[-6],t0-5*h)
             f6 = convert(y0[-7],t0-6*h)
             y0.append(y0[-1] + h*(fp*5257/17280 + f0*139849/120960 - f1*4511/4480 + f2*123133/120960 - f3*88547/120960 + f4*1537/4480 - f5*11351/120960 + f6*275/24192))
-        
         
         t0 = t0 + h
 
@@ -347,19 +347,19 @@ def Formula_Inversa(nome, metodo):
     t0 = float(metodo[-5])
     numPassos = str(ordem-1)
     if(search('euler$', nome)):
-        print('Método Fórmula Inversa de Diferenciação por Euler')
+        saida.write('Método Fórmula Inversa de Diferenciação por Euler')
         y0 = Euler([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_inverso$', nome)):
-        print('Método Fórmula Inversa de Diferenciação por Euler Inverso')
+        saida.write('Método Fórmula Inversa de Diferenciação por Euler Inverso')
         y0 = Euler_Inverso([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('euler_aprimorado$', nome)):
-        print('Método Fórmula Inversa de Diferenciação por Euler Aprimorado')
+        saida.write('Método Fórmula Inversa de Diferenciação por Euler Aprimorado')
         y0 = Euler_Aprimorado([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     elif(search('runge_kutta$', nome)):
-        print('Método Fórmula Inversa de Diferenciação por Runge Kutta')
+        saida.write('Método Fórmula Inversa de Diferenciação por Runge Kutta')
         y0 = Runge_Kutta([metodo[0],metodo[1], metodo[2], numPassos, metodo[-2]])
     else: #Com os pontos determinados
-        print('Método Fórmula Inversa de Diferenciação')
+        saida.write('Método Fórmula Inversa de Diferenciação')
         y0 = metodo[:-5]
     for i in range(len(y0)):
         y0[i-1] = float(y0[i-1])
@@ -372,31 +372,31 @@ def Formula_Inversa(nome, metodo):
     t0 = t0 + (len(y0)-1)*h 
     for i in range( passos - ordem + 1):
         if ordem == 2:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-2], y0[-1], t0, h, ordem, metodo[-2], ordem]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-2], y0[-1], t0-h, h, ordem, metodo[-2], ordem]])
             fp = convert(bashforth[-1],t0+h)
 
             y0.append(h*fp*3/2 + y0[-1]*4/3 - y0[-2]*1/3)
             
         elif ordem == 3:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-3], y0[-2], y0[-1], t0, h, ordem - 1, metodo[-2], ordem]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-3], y0[-2], y0[-1], t0-2*h, h, ordem - 1, metodo[-2], ordem]])
             fp = convert(bashforth[-1],t0+h)
 
             y0.append(h*fp*6/11 + y0[-1]*18/11 - y0[-2]*9/11 + y0[-3]*2/11)
             
         elif ordem == 4:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem, metodo[-2], ordem]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-4], y0[-3], y0[-2], y0[-1], t0-3*h, h, ordem, metodo[-2], ordem]])
             fp = convert(bashforth[-1],t0+h)
 
             y0.append(h*fp*12/25 + y0[-1]*48/25 - y0[-2]*36/25 + y0[-3]*16/25 - y0[-4]*3/25)
             
         elif ordem == 5:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem, metodo[-2], ordem]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0-4*h, h, ordem, metodo[-2], ordem]])
             fp = convert(bashforth[-1],t0+h)
             
             y0.append(h*fp*60/137 + y0[-1]*300/137 - y0[-2]*300/137 + y0[-3]*200/137 - y0[-4]*75/137 + y0[-5]*12/137)
             
         elif ordem == 6:
-            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-6], y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0, h, ordem, metodo[-2], ordem]])
+            bashforth = Adam_Bashforth('',[str(i) for i in [y0[-6], y0[-5], y0[-4], y0[-3], y0[-2], y0[-1], t0-5*h, h, ordem, metodo[-2], ordem]])
             fp = convert(bashforth[-1],t0+h)
             
             y0.append(h*fp*60/147 + y0[-1]*360/147 - y0[-2]*450/147 + y0[-3]*400/147 - y0[-4]*225/147 + y0[-5]*72/147 - y0[-6]*10/147)
@@ -406,11 +406,40 @@ def Formula_Inversa(nome, metodo):
 
     return y0
 
+def Vetor_Ideal(metodo):
+    #y0, t0, h, passos, f
+
+    #DECLARACAO
+    y0 = float(metodo[0])
+    y = [y0]
+    t0 = float(metodo[1])
+    h = float(metodo[2])
+    passos = int(metodo[3],10)
+    funcao = parse_expr(metodo[4])
+    y_ = symbols('y')
+    t_ = symbols('t')
+
+    def convert(Y,T):
+        f = funcao.subs(y_, Y)
+        f = f.subs(t_,T)
+        return f
+    #CALCULO DO EULER
+    
+    for i in range(passos):
+        f = convert(y0,t0 + h*(i+1))
+        y0 = f
+        y.append(y0)
+    
+    return y
+
 #MAIN
 arq = open('entrada.txt', 'r')
 entrada = arq.read()
+saida = open('saida.txt','w+')
 casos = entrada.splitlines()
+casos.pop(0)
 count = 0
+ideal = []
 for metodos in casos:
     count = count + 1
     metodos = metodos.split(' ')
@@ -419,17 +448,22 @@ for metodos in casos:
     h  = metodos[-3]
     t0 = metodos[-4]
     passos = metodos[-2]
+    print(metodos[0])
+    if metodos[0] == 'erro':
+        ideal = Vetor_Ideal(metodos[1:])
+        print("HAHAHA")
+        continue
     if metodos[0] == 'euler':
-        print('Método de Euler')
+        saida.write('Método de Euler\n')
         y = Euler(metodos[1:])
     elif metodos[0] == 'euler_inverso':
-        print('Método de Euler Inverso')
+        saida.write('Método de Euler Inverso\n')
         y = Euler_Inverso(metodos[1:])
     elif metodos[0] == 'euler_aprimorado':
-        print('Método de Euler Aprimorado')
+        saida.write('Método de Euler Aprimorado\n')
         y = Euler_Aprimorado(metodos[1:])
     elif metodos[0] == 'runge_kutta':
-        print('Método de Range-Kutta')
+        saida.write('Método de Range-Kutta\n')
         y = Runge_Kutta(metodos[1:])
     else:
 
@@ -444,20 +478,49 @@ for metodos in casos:
         elif search('^formula_inversa',metodos[0]):
             y = Formula_Inversa(metodos[0], metodos[1:])
         else:
-            print ('Não existe')
+            saida.write('Não existe\n')
             continue
-        print('Ordem =', metodos[-1])
+
+        saida.write('\nOrdem = %s\n' %metodos[-1])
+    #descobrir erro
+    # for i in range(int(passos)):
+        
+    #     erro = (ideal[i]-y[i])/ideal[i]
+    #     if(erro<0):
+    #         erro = -erro
+    #     print('ideal[ '+str(i)+'] = '+str(ideal[i]))
+    #     print('y[ '+str(i)+'] = '+str(y[i]))
+    #     print('erro[ '+str(i)+'] = '+ str(erro))
+    erro = (ideal[int(passos)]-y[int(passos)])/ideal[int(passos)]
+    if(erro<0):
+        erro = -erro
+    print('ideal[', int(passos), '] = ', "{:.6}".format(ideal[int(passos)]))
+    print('y[', int(passos), '] = ', "{:.6}".format(y[int(passos)]))
+    print('erro[', int(passos), '] = ', "{:.4%}".format(erro/100))
+
     t = [float(t0)]
     for i in range(int(passos)):
         t.append(t[-1] + float(h))
     
     plt.plot(t,y, label=('(' + str(count) + ') ' + metodos[0]))
     
-    print('y(', float(t0), ') =', float(metodos[1]))
-    print('h =', float(h))
+    saida.write('y(%f) = ' %float(t0))
+    saida.write('%f\n' %float(metodos[1]))
+    saida.write('h = %f\n' %float(h))
+    if(count%5==0):
+        
+        plt.ylabel('Quantidade de sal(kg)')
+        plt.xlabel('Tempo(min)')
+        plt.legend(loc='upper left',ncol = 2, fontsize = 'xx-small')
+        plt.show()
     for i in range(int(passos)+1):
-        print (i, '\t', y[i])
-plt.ylabel('Eixo Y')
-plt.xlabel('Eixo T')
+        saida.write ('%d\t'%i)
+        saida.write('%f\n' %y[i])
+    saida.write('\n')
+plt.ylabel('Quantidade de sal(kg)')
+plt.xlabel('Tempo(min)')
 plt.legend(loc='upper left',ncol = 2, fontsize = 'xx-small')
 plt.show()
+
+arq.close()
+saida.close()

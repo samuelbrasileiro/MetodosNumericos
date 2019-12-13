@@ -1,19 +1,65 @@
-euler 0 0 0.1 20 1-t+4*y
-euler_inverso 0 0 0.1 20 1-t+4*y
-euler_aprimorado 0 0 0.1 20 1-t+4*y
-runge_kutta 0 0 0.1 20 1-t+4*y
-adam_bashforth 0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 5
-adam_bashforth_by_euler 0 0 0.1 20 1-t+4*y 6
-adam_bashforth_by_euler_inverso 0 0 0.1 20 1-t+4*y 6
-adam_bashforth_by_euler_aprimorado 0 0 0.1 20 1-t+4*y 6
-adam_bashforth_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
-adam_moulton 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 6
-adam_moulton_by_euler 0 0 0.1 20 1-t+4*y 6
-adam_moulton_by_euler_inverso 0 0 0.1 20 1-t+4*y 6
-adam_moulton_by_euler_aprimorado 0 0 0.1 20 1-t+4*y 6
-adam_moulton_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
-formula_inversa 0.0 0.1 0.23 0.402 0.6328 0 0.1 20 1-t+4*y 5
-formula_inversa_by_euler 0 0 0.1 20 1-t+4*y 6
-formula_inversa_by_euler_inverso 0 0 0.1 20 1-t+4*y 6
-formula_inversa_by_euler_aprimorado 0 0 0.1 20 1-t+4*y 6
-formula_inversa_by_runge_kutta 0 0 0.1 20 1-t+4*y 6
+
+erro 25 0 1 100 (25/2)*exp(-t/25)+(25/2)*exp(-3*t/25)
+euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25))
+euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25))
+euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25))
+runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25))
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_bashforth_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_bashforth_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_bashforth_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_bashforth_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_moulton_by_euler 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_moulton_by_euler_inverso 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_moulton_by_euler_aprimorado 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 2
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 3
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 4
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 5
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 6
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 7
+adam_moulton_by_runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25)) 8
+runge_kutta 25 0 1 100 ((-1/2)*exp(-t/25)-(3/2)*exp(-3*t/25))
+erro 0 0 1 100 (25)*exp(-t/25)-(25)*exp(-3*t/25)
+runge_kutta 0 0 1 100 (-exp(-t/25)+3*exp(-3*t/25))
